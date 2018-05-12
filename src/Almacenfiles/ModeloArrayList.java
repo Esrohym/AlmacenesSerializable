@@ -101,7 +101,7 @@ public class ModeloArrayList extends ModeloAbs implements Serializable{
     		
     		System.err.println(" El fichero no tiene objetos ");
     	}
-    	System.out.println("Archivo cargado");
+    	
     }
     		
     public void toFile(String str) {

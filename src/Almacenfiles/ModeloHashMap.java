@@ -72,6 +72,7 @@ public class ModeloHashMap extends ModeloAbs implements Serializable
     				insertarProducto(aux);
     				aux=(Producto)ois.readObject();
     			}
+    			
     		}
     		catch(EOFException eofe) {
     			
@@ -88,7 +89,7 @@ public class ModeloHashMap extends ModeloAbs implements Serializable
     		System.err.println(" El fichero no tiene objetos ");
     		
     	}
-    	System.out.println("Archivo cargado");
+    	
     }
     
     public void toFile(String str) {
