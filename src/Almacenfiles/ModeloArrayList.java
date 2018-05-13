@@ -31,7 +31,7 @@ public class ModeloArrayList extends ModeloAbs implements Serializable{
     public ModeloArrayList(String str) {
     	
     	this();
-    	loadFile(str);
+    	//loadFile(str);
     }
 
     public boolean insertarProducto ( Producto p){
@@ -72,9 +72,12 @@ public class ModeloArrayList extends ModeloAbs implements Serializable{
        return ( i != -1);
     }
     
-    public void loadFile(String str) {
+    public ArrayList<Producto> getLista() {
+		return lista;
+	}
     
-    	try{
+    public void loadFile(String str) {}    
+    	/*try{
     		
     		FileInputStream fis=new FileInputStream(str);
     		ObjectInputStream ois=new ObjectInputStream(fis);
@@ -102,11 +105,11 @@ public class ModeloArrayList extends ModeloAbs implements Serializable{
     		System.err.println(" El fichero no tiene objetos ");
     	}
     	
-    }
+    }*/
     		
-    public void toFile(String str) {
-    	
-        try {	
+    public void toFile(String str) {}	
+       
+    /* try {	
         	FileOutputStream fos=new FileOutputStream(str);
         	ObjectOutputStream oos=new ObjectOutputStream(fos);
         	
@@ -121,7 +124,7 @@ public class ModeloArrayList extends ModeloAbs implements Serializable{
         	System.err.println(" Error en E/S sobre fichero "+str+ " "+ioe);
         }
         	
-    }		
+    }]*/		
     
     
     

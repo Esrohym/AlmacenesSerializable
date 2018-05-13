@@ -17,7 +17,7 @@ public class MiAlmacen
     static Scanner sc;
     public static final String nFile="productos.objetos";
     public static void main(String[] args){
-        almacen=new ModeloHashMap (nFile);
+        almacen=new ModeloArrayListFile(nFile);
         /*loadFile();//se podría usar este metodo desde MiAlmacen para ambos tipos de colecciones
          * 
          */
