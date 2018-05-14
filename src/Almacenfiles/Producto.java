@@ -74,4 +74,9 @@ public class Producto implements Serializable
     public void setPrecio( float valor ){
         precio = valor;
     }
+    
+    public String getNombre() {
+    	
+    	return nombre;
+    }
 }

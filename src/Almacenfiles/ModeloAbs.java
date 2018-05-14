@@ -1,10 +1,13 @@
 package Almacenfiles;
 /**
+
  * Abstract class ModeloAbs - Clase de acceso a Modelo de DATOS
  * 
  * @author: Alberto Lopez
  * Date: 24/04/2018
  */
+import java.util.Iterator;
+
 public abstract class ModeloAbs
 {
     public ModeloAbs() {
@@ -20,7 +23,8 @@ public abstract class ModeloAbs
     
     abstract boolean modificarProducto (Producto nuevo);
     
-    abstract void loadFile(String str);
+ 
+    abstract Iterator <Producto> getIterator();
     
-    abstract void toFile(String str);
+    
 }

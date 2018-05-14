@@ -1,11 +1,4 @@
 package Almacenfiles;
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 /**
  * Write a description of class ModeloHaspMap here.
  * 
@@ -14,8 +7,9 @@ import java.io.Serializable;
  */
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Iterator;
 
-public class ModeloHashMap extends ModeloAbs implements Serializable
+public class ModeloHashMap extends ModeloAbs
 {
     private HashMap <Integer,Producto> lista;
     
@@ -23,11 +17,6 @@ public class ModeloHashMap extends ModeloAbs implements Serializable
     {
        lista=new HashMap  <Integer,Producto>();
     }
-    public ModeloHashMap(String fichero) {
-    	this();
-    	loadFile(fichero);
-    }
-    	
 
     public boolean insertarProducto ( Producto p){
       assert ( p != null ); // No permito productos nulos  
@@ -48,6 +37,7 @@ public class ModeloHashMap extends ModeloAbs implements Serializable
         int i = 1;
         for (Map.Entry<Integer,Producto> valor: lista.entrySet()) {
             System.out.println(" Nº "+i+" "+valor.getValue());
+         
             i++;
         }
     }
@@ -57,57 +47,8 @@ public class ModeloHashMap extends ModeloAbs implements Serializable
        return (lista.containsValue( nuevo));
     }
     
-    public void loadFile(String str) {
+    public Iterator <Producto> getIterator(){
+        return lista.values().iterator();
+    } 
     
-    	try{
-    		
-    		FileInputStream fis=new FileInputStream(str);
-    		
-    		ObjectInputStream ois=new ObjectInputStream(fis);
-    		
-    		try{
-    			Producto aux=(Producto)ois.readObject();
-    			
-    			while(true) {	
-    				insertarProducto(aux);
-    				aux=(Producto)ois.readObject();
-    			}
-    			
-    		}
-    		catch(EOFException eofe) {
-    			
-    			fis.close();
-    			ois.close();
-    		}
-    	}
-    	catch(IOException ioe) {
-    		
-    		System.err.println(" Error en E/S sobre fichero "+str+ " "+ioe);
-    	}
-    	catch(ClassNotFoundException cce) {
-    		
-    		System.err.println(" El fichero no tiene objetos ");
-    		
-    	}
-    	
-    }
-    
-    public void toFile(String str) {
-    	
-        try {	
-        	FileOutputStream fos=new FileOutputStream(str);
-        	ObjectOutputStream oos=new ObjectOutputStream(fos);
-        	
-        	for(Map.Entry<Integer, Producto> p:lista.entrySet()) {
-        		oos.writeObject(p.getValue());
-        	}
-        	fos.close();
-        	oos.close();
-        }
-        catch(IOException ioe) {
-        	
-        	System.err.println(" Error en E/S sobre fichero "+str+ " "+ioe);
-        }
-        	
-    }
 }

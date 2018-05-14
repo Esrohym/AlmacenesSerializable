@@ -6,32 +6,15 @@ package Almacenfiles;
  * @version (a version number or a date)
  */
 import java.util.ArrayList;
-import java.util.Map;
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-public class ModeloArrayList extends ModeloAbs implements Serializable{
-    /**
-	 * 
-	 */
-	/**
-	 * 
-	 */
-	private ArrayList <Producto> lista;
+import java.util.Iterator;
+
+public class ModeloArrayList extends ModeloAbs
+{
+    private ArrayList <Producto> lista;
     
     public ModeloArrayList()
     {
        lista=new ArrayList <Producto>();
-    }
-    
-    public ModeloArrayList(String str) {
-    	
-    	this();
-    	//loadFile(str);
     }
 
     public boolean insertarProducto ( Producto p){
@@ -72,61 +55,7 @@ public class ModeloArrayList extends ModeloAbs implements Serializable{
        return ( i != -1);
     }
     
-    public ArrayList<Producto> getLista() {
-		return lista;
-	}
-    
-    public void loadFile(String str) {}    
-    	/*try{
-    		
-    		FileInputStream fis=new FileInputStream(str);
-    		ObjectInputStream ois=new ObjectInputStream(fis);
-    		
-    		try{
-    			Producto aux=(Producto)ois.readObject();
-    			
-    			while(true) {	
-    				insertarProducto(aux);
-    				aux=(Producto)ois.readObject();
-    			}
-    		}
-    		catch(EOFException eofe) {
-    			
-    			fis.close();
-    			ois.close();
-    		}
-    	}
-    	catch(IOException ioe) {
-    		
-    		System.err.println(" Error en E/S sobre fichero "+str+ " "+ioe);
-    	}
-    	catch(ClassNotFoundException cce) {
-    		
-    		System.err.println(" El fichero no tiene objetos ");
-    	}
-    	
-    }*/
-    		
-    public void toFile(String str) {}	
-       
-    /* try {	
-        	FileOutputStream fos=new FileOutputStream(str);
-        	ObjectOutputStream oos=new ObjectOutputStream(fos);
-        	
-        	for(Producto p:lista) {
-        		oos.writeObject(p);
-        	}
-        	fos.close();
-        	oos.close();
-        }
-        catch(IOException ioe) {
-        	
-        	System.err.println(" Error en E/S sobre fichero "+str+ " "+ioe);
-        }
-        	
-    }]*/		
-    
-    
-    
-    
+    public Iterator <Producto> getIterator(){
+        return lista.iterator();   
+    }   
 }    

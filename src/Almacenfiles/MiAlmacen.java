@@ -1,13 +1,9 @@
 package Almacenfiles;
+
 import java.util.Scanner;
 import java.util.InputMismatchException;
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 // Crear la clase Producto y completar los métodos
 
@@ -15,12 +11,9 @@ public class MiAlmacen
 {
     static private ModeloAbs almacen;
     static Scanner sc;
-    public static final String nFile="productos.objetos";
+    
     public static void main(String[] args){
-        almacen=new ModeloArrayListFile(nFile);
-        /*loadFile();//se podría usar este metodo desde MiAlmacen para ambos tipos de colecciones
-         * 
-         */
+        almacen=new ModeloArrayListFile ();
         sc = new Scanner(System.in);
         int opcion=0;
         do{
@@ -36,15 +29,17 @@ public class MiAlmacen
                     case 7: listar();break;
                     case 8: listarPocoStock();break;
                 }
+                if ( opcion != 9 ){
                 System.out.println("\n---------------------------- ");
                 System.out.print("Pulse enter para continuar");
                 sc.nextLine();
+            }
         }while(opcion!=9);
         sc.close();
-        
+        System.out.println("Fin de programa");
     }
     
-    private static void consultar(){        
+    private static void consultar(){System.out.println("Aún no disponible");        
        System.out.println("<CONSULTA>");
        System.out.print("Introduzca codigo:");
        int codigo = leerEntero();
@@ -110,7 +105,6 @@ public class MiAlmacen
        int codigo = leerEntero();
        if (almacen.borrarProducto(codigo) ) {
            System.out.println("--Producto eliminado--");
-           almacen.toFile(nFile);
         }
         else{
            System.out.println("El producto no se encuentra en almacen");
@@ -134,7 +128,6 @@ public class MiAlmacen
              p.setPrecio(precio);
              almacen.modificarProducto(p);
              System.out.println("Producto actualizado");
-             almacen.toFile(nFile);
             }
         else {
             System.out.println("El precio debe ser mayor que cero");
@@ -156,8 +149,8 @@ public class MiAlmacen
         System.out.print("Introduzca cantidad a comprar:");
         int cantidad = leerEntero();
         p.setStock(p.getStock()+cantidad);
+        almacen.modificarProducto(p);
         System.out.println("Producto actualizado");
-        almacen.toFile(nFile);
        } 
     }
     
@@ -179,19 +172,26 @@ public class MiAlmacen
              p.setStock(p.getStock()-cantidad);
              almacen.modificarProducto(p);
              System.out.println("Producto actualizado");
-             almacen.toFile(nFile);
         }
        }
     }
     
-    private static void listarPocoStock(){
+    private static void listar(){
         System.out.println("<LISTAR>");
          almacen.listarProductos();
     }
     
-    private static void listar(){        
-         System.out.println("<LISTAR>");
-         almacen.listarProductos();
+    private static void listarPocoStock(){        
+         System.out.println("<LISTAR STOCK MINIMO>");
+         Iterator itr = almacen.getIterator();
+         int i=1;
+         while (itr.hasNext()){
+             Producto p = (Producto) itr.next();
+             if (p.getStock() <= p.getStock_min()){
+             System.out.println("Nº "+i+" "+p);
+            }    
+      }
+    
     }
     
     
@@ -214,7 +214,6 @@ public class MiAlmacen
        System.out.print("Precio:");
        float precio = leerFloat(); p.setPrecio(precio);
        almacen.insertarProducto(p);
-       almacen.toFile(nFile);
     }
        
 
@@ -239,40 +238,6 @@ public class MiAlmacen
         }
         return valor;
     }
-    
-    //carga el fichero con los objetos
-    /*private static void loadFile() {
         
-    	try{
-    		
-    		FileInputStream fis=new FileInputStream(nFile);
-    		
-    		ObjectInputStream ois=new ObjectInputStream(fis);
-    		
-    		try{
-    			Producto aux=(Producto)ois.readObject();
-    			
-    			while(true) {	
-    				almacen.insertarProducto(aux);
-    				aux=(Producto)ois.readObject();
-    			}
-    		}
-    		catch(EOFException eofe) {
-    			
-    			fis.close();
-    			ois.close();
-    		}
-    	}
-    	catch(IOException ioe) {
-    		
-    		System.err.println(" Error en E/S sobre fichero "+nFile+ " "+ioe);
-    	}
-    	catch(ClassNotFoundException cce) {
-    		
-    		System.err.println(" El fichero no tiene objetos ");
-    		
-    	}
-    }
-    */
 }
 
