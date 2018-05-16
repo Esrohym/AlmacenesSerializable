@@ -128,7 +128,7 @@ public class ModeloBD extends ModeloAbs{
 		
 		ModeloArrayList aux=new ModeloArrayList();
 		try{
-			rset=stmt.executeQuery("Select * from productos");
+			rset=stmt.executeQuery("Select * from Productos");
 			
 			while(rset.next()) {
 				
