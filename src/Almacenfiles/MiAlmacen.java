@@ -13,7 +13,7 @@ public class MiAlmacen
     static Scanner sc;
     
     public static void main(String[] args){
-        almacen=new ModeloArrayListFile ();
+        almacen=new ModeloBD();
         sc = new Scanner(System.in);
         int opcion=0;
         do{
@@ -118,6 +118,7 @@ public class MiAlmacen
        Producto p = almacen.buscarProducto(codigo);
        if ( p == null){
               System.out.println("El producto no se encuentra en almacen");
+              
         }
        else {
            System.out.println("PRODUCTO "+p);
@@ -210,7 +211,7 @@ public class MiAlmacen
        System.out.print("Stock:");
        int stock = leerEntero(); p.setStock(stock);
        System.out.print("Stock Minimo:");
-       int stock_min = leerEntero(); p.setStock(stock_min);
+       int stock_min = leerEntero(); p.setStock_min(stock_min);
        System.out.print("Precio:");
        float precio = leerFloat(); p.setPrecio(precio);
        almacen.insertarProducto(p);

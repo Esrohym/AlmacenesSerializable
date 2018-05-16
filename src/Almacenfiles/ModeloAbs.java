@@ -23,7 +23,6 @@ public abstract class ModeloAbs
     
     abstract boolean modificarProducto (Producto nuevo);
     
- 
     abstract Iterator <Producto> getIterator();
     
     

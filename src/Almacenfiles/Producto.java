@@ -41,7 +41,19 @@ public class Producto implements Serializable
      }
 
     
-    public int getCodigo (){
+    public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public int getCodigo (){
         return codigo;
     }
     
